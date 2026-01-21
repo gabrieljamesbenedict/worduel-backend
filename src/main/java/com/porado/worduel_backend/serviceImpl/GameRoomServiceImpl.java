@@ -31,9 +31,9 @@ public class GameRoomServiceImpl implements GameRoomService {
     }
 
     @Override
-    public GameRoom updateGameRoom(GameRoom gameRoom) {
-        if (!gameRoomRepo.existsById(gameRoom.getRoomId())) {
-            throw new RuntimeException("GameRoom not found with id " + gameRoom.getRoomId());
+    public GameRoom updateGameRoom(Long id, GameRoom gameRoom) {
+        if (!gameRoomRepo.existsById(id)) {
+            throw new RuntimeException("GameRoom not found with id " + id);
         }
         return gameRoomRepo.save(gameRoom);
     }

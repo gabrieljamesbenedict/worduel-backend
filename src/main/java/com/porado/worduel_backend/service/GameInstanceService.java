@@ -10,6 +10,6 @@ public interface GameInstanceService {
     Optional<GameInstance> getGameInstanceById(Long id);
     List<GameInstance> getAllGameInstances();
     GameInstance createGameInstance(GameInstance gameInstance);
-    GameInstance updateGameInstance(GameInstance gameInstance);
+    GameInstance updateGameInstance(Long id, GameInstance gameInstance);
     void deleteGameInstanceById(Long id);
 }

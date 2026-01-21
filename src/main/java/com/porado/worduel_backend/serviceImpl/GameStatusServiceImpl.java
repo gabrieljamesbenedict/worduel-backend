@@ -31,9 +31,9 @@ public class GameStatusServiceImpl implements GameStatusService {
     }
 
     @Override
-    public GameStatus updateGameStatus(GameStatus gameStatus) {
-        if (!gameStatusRepo.existsById(gameStatus.getStatusId())) {
-            throw new RuntimeException("GameStatus not found with id " + gameStatus.getStatusId());
+    public GameStatus updateGameStatus(Long id, GameStatus gameStatus) {
+        if (!gameStatusRepo.existsById(id)) {
+            throw new RuntimeException("GameStatus not found with id " + id);
         }
         return gameStatusRepo.save(gameStatus);
     }

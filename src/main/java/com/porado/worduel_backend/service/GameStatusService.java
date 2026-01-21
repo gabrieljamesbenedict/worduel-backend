@@ -10,6 +10,6 @@ public interface GameStatusService {
     Optional<GameStatus> getGameStatusById(Long id);
     List<GameStatus> getAllGameStatuses();
     GameStatus createGameStatus(GameStatus gameStatus);
-    GameStatus updateGameStatus(GameStatus gameStatus);
+    GameStatus updateGameStatus(Long id, GameStatus gameStatus);
     void deleteGameStatusById(Long id);
 }

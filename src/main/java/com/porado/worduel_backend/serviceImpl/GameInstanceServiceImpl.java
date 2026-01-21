@@ -31,9 +31,9 @@ public class GameInstanceServiceImpl implements GameInstanceService {
     }
 
     @Override
-    public GameInstance updateGameInstance(GameInstance gameInstance) {
-        if (!gameInstanceRepo.existsById(gameInstance.getGameId())) {
-            throw new RuntimeException("GameInstance not found with id " + gameInstance.getGameId());
+    public GameInstance updateGameInstance(Long id, GameInstance gameInstance) {
+        if (!gameInstanceRepo.existsById(id)) {
+            throw new RuntimeException("GameInstance not found with id " + id);
         }
         return gameInstanceRepo.save(gameInstance);
     }
