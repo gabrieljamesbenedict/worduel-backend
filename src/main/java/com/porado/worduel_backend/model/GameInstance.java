@@ -18,6 +18,8 @@ public class GameInstance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gameId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "statusId", nullable = false)
     private GameStatus gameStatus;
 
 }
