@@ -22,4 +22,8 @@ public class GameInstance {
     @JoinColumn(name = "statusId", nullable = false)
     private GameStatus gameStatus;
 
+    @OneToOne
+    @JoinColumn(name = "roomId", nullable = false)
+    private GameRoom gameRoom;
+
 }
