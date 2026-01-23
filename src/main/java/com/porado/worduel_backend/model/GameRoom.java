@@ -20,7 +20,7 @@ public class GameRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
 
-    @Column(nullable = false)
-    private String name;
+    private Instant createAt;
+    private Instant deletedAt;
 
 }
