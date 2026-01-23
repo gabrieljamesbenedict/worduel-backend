@@ -40,6 +40,9 @@ public class GameRoomServiceImpl implements GameRoomService {
 
     @Override
     public void deleteGameRoomById(Long id) {
+        if (!gameRoomRepo.existsById(id)) {
+            throw new RuntimeException("GameRoom not found with id " + id);
+        }
         gameRoomRepo.deleteById(id);
     }
 }

@@ -40,6 +40,9 @@ public class GameInstanceServiceImpl implements GameInstanceService {
 
     @Override
     public void deleteGameInstanceById(Long id) {
+        if (!gameInstanceRepo.existsById(id)) {
+            throw new RuntimeException("GameInstance not found with id " + id);
+        }
         gameInstanceRepo.deleteById(id);
     }
 }
