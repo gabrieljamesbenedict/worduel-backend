@@ -20,7 +20,7 @@ public class GameRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
 
-    private Instant createAt;
+    private Instant createdAt;
     private Instant deletedAt;
 
 }
