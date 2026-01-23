@@ -33,7 +33,6 @@ public class Player {
     @Column(nullable = false)
     private boolean enabled = true;
 
-    @Column(nullable = false)
     @ManyToOne
     @JoinColumn(name = "roleId")
     private PlayerRole role;
