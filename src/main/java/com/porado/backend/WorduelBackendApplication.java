@@ -1,4 +1,4 @@
-package com.porado.worduel_backend;
+package com.porado.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

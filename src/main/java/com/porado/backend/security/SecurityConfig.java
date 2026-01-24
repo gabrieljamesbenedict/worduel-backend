@@ -1,4 +1,4 @@
-package com.porado.worduel_backend.security;
+package com.porado.backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

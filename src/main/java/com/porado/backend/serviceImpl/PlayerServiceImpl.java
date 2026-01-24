@@ -1,8 +1,8 @@
-package com.porado.worduel_backend.serviceImpl;
+package com.porado.backend.serviceImpl;
 
-import com.porado.worduel_backend.model.Player;
-import com.porado.worduel_backend.repository.PlayerRepository;
-import com.porado.worduel_backend.service.PlayerService;
+import com.porado.backend.model.Player;
+import com.porado.backend.repository.PlayerRepository;
+import com.porado.backend.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

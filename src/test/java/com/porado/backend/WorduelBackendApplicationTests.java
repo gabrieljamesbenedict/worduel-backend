@@ -1,4 +1,4 @@
-package com.porado.worduel_backend;
+package com.porado.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

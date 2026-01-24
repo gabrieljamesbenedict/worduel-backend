@@ -1,4 +1,4 @@
-package com.porado.worduel_backend.model;
+package com.porado.backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

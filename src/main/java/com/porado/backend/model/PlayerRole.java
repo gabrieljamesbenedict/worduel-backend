@@ -1,4 +1,4 @@
-package com.porado.worduel_backend.model;
+package com.porado.backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,18 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "GameStatuses")
+@Table(name = "PlayerRoles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GameStatus {
+public class PlayerRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long statusId;
+    private Long roleId;
 
     @Column(nullable = false)
     private String name;
-
 }

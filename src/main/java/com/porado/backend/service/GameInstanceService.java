@@ -1,6 +1,6 @@
-package com.porado.worduel_backend.service;
+package com.porado.backend.service;
 
-import com.porado.worduel_backend.model.GameInstance;
+import com.porado.backend.model.GameInstance;
 
 import java.util.List;
 import java.util.Optional;

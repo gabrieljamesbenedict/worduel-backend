@@ -1,7 +1,7 @@
-package com.porado.worduel_backend.controller;
+package com.porado.backend.controller;
 
-import com.porado.worduel_backend.model.GameRoom;
-import com.porado.worduel_backend.service.GameRoomService;
+import com.porado.backend.model.GameRoom;
+import com.porado.backend.service.GameRoomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
