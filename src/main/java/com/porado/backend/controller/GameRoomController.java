@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("rooms")
+@RequestMapping("/gameroom")
 @RequiredArgsConstructor
 public class GameRoomController {
 
