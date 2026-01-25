@@ -25,10 +25,15 @@ public class Player {
     private String password;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean enabled = true;
 
     @ManyToOne
     @JoinColumn(name = "roleId")
     private PlayerRole role;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "roomId", nullable = false)
+    private GameRoom gameRoom;
 
 }
