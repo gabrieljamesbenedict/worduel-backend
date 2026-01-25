@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class PlayerRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
     @Column(nullable = false)
