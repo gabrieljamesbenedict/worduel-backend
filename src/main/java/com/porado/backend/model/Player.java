@@ -29,11 +29,11 @@ public class Player {
     private boolean enabled = true;
 
     @ManyToOne
-    @JoinColumn(name = "roleId")
+    @JoinColumn(name = "roleId", nullable = false)
     private PlayerRole role;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "roomId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "roomId", nullable = true)
     private GameRoom gameRoom;
 
 }
