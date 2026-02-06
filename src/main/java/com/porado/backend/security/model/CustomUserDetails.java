@@ -1,6 +1,7 @@
 package com.porado.backend.security.model;
 
 import com.porado.backend.model.Player;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +17,7 @@ public class CustomUserDetails implements UserDetails {
     private final Player player;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public @NonNull Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(player.getRole().getName()));
     }
 
@@ -26,7 +27,7 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
+    public @NonNull String getUsername() {
         return player.getUsername();
     }
 
