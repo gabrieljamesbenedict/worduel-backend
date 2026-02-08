@@ -1,6 +1,5 @@
 package com.porado.backend.serviceImpl;
 
-import com.porado.backend.exception.UserAlreadyExistsException;
 import com.porado.backend.exception.UserNotFoundException;
 import com.porado.backend.model.User;
 import com.porado.backend.repository.UserRepository;
@@ -31,8 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        if (userRepository.existsById(user.getUserId())) throw new UserAlreadyExistsException("User already exists");
-        else if (user.getUserId() != null) throw new IllegalArgumentException("User must have null Id on creation");
+        //if (userRepository.existsById(user.getUserId())) throw new UserAlreadyExistsException("User already exists");
+        if (user.getUserId() != null) throw new IllegalArgumentException("User must have null Id on creation");
         return userRepository.save(user);
     }
 
