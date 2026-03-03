@@ -16,22 +16,22 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthToken> login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+        return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/register")
     public ResponseEntity<MessageResponse> register(@RequestBody RegisterRequest request) {
-        return authService.register(request);
+        return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
-        return authService.logout();
+        return ResponseEntity.ok(authService.logout());
     }
 
     @GetMapping("/me")
     public ResponseEntity<UserInfo> me() {
-        return authService.me();
+        return ResponseEntity.ok(authService.me());
     }
 
 }

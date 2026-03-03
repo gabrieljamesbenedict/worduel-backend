@@ -20,7 +20,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
 
     @Override
-    public ResponseEntity<AuthToken> login(LoginRequest loginRequest) {
+    public AuthToken login(LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
@@ -32,25 +32,21 @@ public class AuthServiceImpl implements AuthService {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         assert userDetails != null;
-        return ResponseEntity.ok(
-                new AuthToken(jwtUtil.generateToken(userDetails))
-        );
+        return new AuthToken(jwtUtil.generateToken(userDetails));
     }
 
     @Override
-    public ResponseEntity<?> logout() {
-        return ResponseEntity.ok(
-                new MessageResponse("Logged out successfully")
-        );
+    public MessageResponse logout() {
+        return new MessageResponse("Logged out successfully");
     }
 
     @Override
-    public ResponseEntity<MessageResponse> register(RegisterRequest registerRequest) {
+    public MessageResponse register(RegisterRequest registerRequest) {
         return null;
     }
 
     @Override
-    public ResponseEntity<UserInfo> me() {
+    public UserInfo me() {
         return null;
     }
 }
