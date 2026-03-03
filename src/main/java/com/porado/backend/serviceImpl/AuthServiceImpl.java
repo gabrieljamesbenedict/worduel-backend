@@ -1,6 +1,7 @@
 package com.porado.backend.serviceImpl;
 
 import com.porado.backend.dto.*;
+import com.porado.backend.security.JwtUtil;
 import com.porado.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
 
     @Override
     public ResponseEntity<AuthToken> login(LoginRequest loginRequest) {
@@ -29,11 +31,10 @@ public class AuthServiceImpl implements AuthService {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        // TODO: Create JwtUtil
-        String token = "add token here";
-        AuthToken authToken = new AuthToken(token);
-
-        return ResponseEntity.status(HttpStatus.OK).body(authToken);
+        assert userDetails != null;
+        return ResponseEntity.ok(
+                new AuthToken(jwtUtil.generateToken(userDetails))
+        );
     }
 
     @Override
