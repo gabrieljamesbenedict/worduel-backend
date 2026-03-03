@@ -39,7 +39,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<?> logout() {
-        return null;
+        return ResponseEntity.ok(
+                new MessageResponse("Logged out successfully")
+        );
     }
 
     @Override
