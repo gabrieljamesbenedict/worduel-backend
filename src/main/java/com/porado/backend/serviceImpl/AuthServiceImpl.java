@@ -1,6 +1,8 @@
 package com.porado.backend.serviceImpl;
 
 import com.porado.backend.dto.*;
+import com.porado.backend.exception.LoginException;
+import com.porado.backend.exception.UserAlreadyExistsException;
 import com.porado.backend.exception.UserNotFoundException;
 import com.porado.backend.model.User;
 import com.porado.backend.repository.UserRepository;
@@ -27,15 +29,19 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthToken login(LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    loginRequest.getUsername(),
-                    loginRequest.getPassword()
-            )
-        );
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getUsername(),
+                            loginRequest.getPassword()
+                    )
+            );
 
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return new AuthToken(jwtUtil.generateToken(userDetails));
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return new AuthToken(jwtUtil.generateToken(userDetails));
+        } catch (AuthenticationException e) {
+            throw new LoginException("Invalid username or password");
+        }
     }
 
     @Override
