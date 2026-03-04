@@ -30,8 +30,6 @@ public class AuthServiceImpl implements AuthService {
         );
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        assert userDetails != null;
         return new AuthToken(jwtUtil.generateToken(userDetails));
     }
 
