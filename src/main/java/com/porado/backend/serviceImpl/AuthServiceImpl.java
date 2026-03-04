@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
+    private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
@@ -45,6 +46,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserInfo me() {
-        return null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User not found with username=" + username));
+
+        return new UserInfo(user);
     }
 }
