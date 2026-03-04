@@ -15,8 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +26,9 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final UserService userService;
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
     @Override
@@ -51,7 +55,18 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public MessageResponse register(RegisterRequest registerRequest) {
-        return null;
+
+        if (userRepository.existsByUsername(registerRequest.getUsername())) {
+            throw new UserAlreadyExistsException("User already exists with username=" + registerRequest.getUsername());
+        }
+
+        User user = new User();
+        user.setUsername(registerRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setRole("ROLE_PLAYER");
+        userService.createUser(user);
+
+        return new MessageResponse("Successfully created user account");
     }
 
     @Override
