@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class GameRoom {
 
-    private String roomId;
+    private Long roomId;
 
     private User hostPlayer;
     private List<User> playerList = new ArrayList<>();

@@ -8,8 +8,8 @@ import java.util.List;
 public interface GameService {
     GameRoom createRoom(User host);
     List<GameRoom> searchRooms();
-    GameRoom getRoom(String roomId);
-    void joinRoom(String roomId, String playerId);
-    void leaveRoom(String roomId, String playerId);
-    void startGame(String roomId);
+    GameRoom getRoom(Long roomId);
+    void joinRoom(Long roomId, Long playerId);
+    void leaveRoom(Long roomId, Long playerId);
+    void startGame(Long roomId);
 }

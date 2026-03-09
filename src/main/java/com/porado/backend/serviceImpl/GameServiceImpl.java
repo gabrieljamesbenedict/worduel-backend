@@ -2,6 +2,7 @@ package com.porado.backend.serviceImpl;
 
 import com.porado.backend.model.User;
 import com.porado.backend.service.GameService;
+import com.porado.backend.service.UserService;
 import com.porado.core.game.GameRoom;
 import com.porado.core.manager.GameRoomManager;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
     private final GameRoomManager gameRoomManager;
+    private final UserService userService;
 
     @Override
     public GameRoom createRoom(User host) {
@@ -26,22 +28,23 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameRoom getRoom(String roomId) {
+    public GameRoom getRoom(Long roomId) {
         return gameRoomManager.getRoom(roomId);
     }
 
     @Override
-    public void joinRoom(String roomId, String playerId) {
-        gameRoomManager.
+    public void joinRoom(Long roomId, Long playerId) {
+        User user = userService.getUserById(playerId);
+        gameRoomManager.getRoom(roomId).joinPlayer(user);
     }
 
     @Override
-    public void leaveRoom(String roomId, String playerId) {
+    public void leaveRoom(Long roomId, Long playerId) {
 
     }
 
     @Override
-    public void startGame(String roomId) {
+    public void startGame(Long roomId) {
 
     }
 }

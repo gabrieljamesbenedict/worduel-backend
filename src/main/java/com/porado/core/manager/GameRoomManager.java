@@ -22,7 +22,7 @@ public class GameRoomManager {
         return room;
     }
 
-    public GameRoom getRoom(String roomId) {
+    public GameRoom getRoom(Long roomId) {
         Optional<GameRoom> room = gameRoomSet.stream()
                 .filter(r -> r.getRoomId().equals(roomId))
                 .findFirst();
@@ -34,13 +34,14 @@ public class GameRoomManager {
         return gameRoomSet;
     }
 
-    public void removeRoom(String roomId) {
+    public void removeRoom(Long roomId) {
         gameRoomSet.removeIf(room -> room.getRoomId().equals(roomId));
     }
 
-    public boolean roomExists(String roomId) {
-        return gameRoomSet.stream()
+    public boolean roomExists(Long roomId) {
+        gameRoomSet.stream()
                 .anyMatch(room -> room.getRoomId().equals(roomId));
+        return false;
     }
 
 }
