@@ -1,6 +1,6 @@
 package com.porado.backend.serviceImpl;
 
-import com.porado.backend.dto.Word;
+import com.porado.backend.model.Word;
 import com.porado.backend.repository.WordRepository;
 import com.porado.backend.service.WordService;
 import lombok.RequiredArgsConstructor;

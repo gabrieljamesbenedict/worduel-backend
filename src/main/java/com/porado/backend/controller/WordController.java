@@ -1,8 +1,7 @@
 package com.porado.backend.controller;
 
-import com.porado.backend.dto.Word;
+import com.porado.backend.model.Word;
 import com.porado.backend.service.WordService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

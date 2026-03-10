@@ -1,6 +1,6 @@
 package com.porado.backend.repository;
 
-import com.porado.backend.dto.Word;
+import com.porado.backend.model.Word;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import tools.jackson.core.json.JsonFactory;
