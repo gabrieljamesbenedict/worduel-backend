@@ -2,6 +2,7 @@ package com.porado.backend.controller;
 
 import com.porado.backend.model.User;
 import com.porado.backend.service.GameService;
+import com.porado.backend.service.UserService;
 import com.porado.core.game.GameRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,11 @@ import java.util.List;
 public class GameController {
 
     private final GameService gameService;
+    private final UserService userService;
 
     @PostMapping("/create/{hostId}")
     public GameRoom createRoom(@PathVariable Long hostId) {
-        User host = new User();
-        host.setUserId(hostId);
+        User host = userService.getUserById(hostId);
         return gameService.createRoom(host);
     }
 
