@@ -1,4 +1,4 @@
-package com.porado.backend.dto;
+package com.porado.backend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
