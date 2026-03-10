@@ -13,7 +13,7 @@ import java.util.UUID;
 @Component
 public class PlayerIdFilter extends OncePerRequestFilter {
 
-    public static final String HEADER_NAME = "X-Guest-ID";
+    public static final String HEADER_NAME = "X-Player-ID";
 
     @Override
     protected void doFilterInternal(
@@ -23,15 +23,12 @@ public class PlayerIdFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String guestId = request.getHeader(HEADER_NAME);
-
         if (guestId == null || guestId.isBlank()) {
             guestId = UUID.randomUUID().toString();
         }
 
         request.setAttribute("guestId", guestId);
-
         response.setHeader(HEADER_NAME, guestId);
-
         filterChain.doFilter(request, response);
     }
 }
