@@ -30,6 +30,7 @@ public class WordRepository {
         do {
             wordStr = (String)wordSet.toArray()[rand.nextInt(sizeOfSet)];
         } while(wordStr.length() != length);
+        System.out.println("Chosen Word: "+wordStr);
         return new Word(wordStr);
     }
 

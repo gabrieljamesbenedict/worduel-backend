@@ -51,6 +51,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public void startGame(Long roomId) {
         GameRoom room = gameRoomManager.getRoom(roomId);
-        room.setStatus(GameRoomStatus.STARTED);
+        room.setStatus(GameRoomStatus.ONGOING);
     }
 }
