@@ -27,7 +27,7 @@ public class PlayerIdFilter extends OncePerRequestFilter {
             guestId = UUID.randomUUID().toString();
         }
 
-        request.setAttribute("guestId", guestId);
+        request.setAttribute("playerId", guestId);
         response.setHeader(HEADER_NAME, guestId);
         filterChain.doFilter(request, response);
     }

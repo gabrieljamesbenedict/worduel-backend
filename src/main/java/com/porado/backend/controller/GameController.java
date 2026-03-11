@@ -1,8 +1,11 @@
 package com.porado.backend.controller;
 
+import com.porado.backend.domain.Player;
 import com.porado.backend.model.MessageResponse;
 import com.porado.backend.service.GameService;
+import com.porado.backend.service.PlayerService;
 import com.porado.core.game.GameRoom;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +20,9 @@ import java.util.UUID;
 public class GameController {
 
     private final GameService gameService;
+    private final PlayerService playerService;
 
-    @GetMapping
+    @GetMapping("/room")
     public ResponseEntity<List<GameRoom>> viewAllRooms() {
         return ResponseEntity.ok(gameService.viewAllRooms());
     }
@@ -42,6 +46,24 @@ public class GameController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @PostMapping("/room/join")
+    public ResponseEntity<GameRoom> joinRoom(HttpServletRequest request, @RequestParam("roomId") UUID roomId) {
+        String id = (String) request.getAttribute("playerId");
+        UUID playerId = UUID.fromString(id);
+        Player player = playerService.getOrCreatePlayer(playerId);
+
+        return ResponseEntity.ok(gameService.joinRoom(player, roomId));
+    }
+
+    @PostMapping("/room/leave")
+    public ResponseEntity<GameRoom> leaveRoom(HttpServletRequest request, @RequestParam("roomId") UUID roomId) {
+        String id = (String) request.getAttribute("playerId");
+        UUID playerId = UUID.fromString(id);
+        Player player = playerService.getOrCreatePlayer(playerId);
+
+        return ResponseEntity.ok(gameService.leaveRoom(player, roomId));
     }
 
 }

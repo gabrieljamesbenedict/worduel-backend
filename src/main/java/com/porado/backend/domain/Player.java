@@ -12,6 +12,6 @@ public class Player {
 
     private final UUID playerId;
     private String nickname;
-    private GameRoom currentRoom;
+    private UUID currentRoomId;
 
 }

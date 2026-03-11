@@ -1,11 +1,9 @@
 package com.porado.core.manager;
 
 import com.porado.backend.service.WordService;
-import com.porado.core.game.DuelGameRoom;
 import com.porado.core.game.GameRoom;
 import com.porado.core.game.SoloGameRoom;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.porado.backend.serviceImpl;
 
+import com.porado.backend.domain.Player;
 import com.porado.backend.service.GameService;
 import com.porado.core.game.GameRoom;
 import com.porado.core.manager.GameRoomManager;
@@ -30,9 +31,26 @@ public class GameServiceImpl implements GameService {
         //return gameRoomManager.createDuelRoom();
         return null;
     }
+
     @Override
     public void destroyRoom(UUID roomId) {
         gameRoomManager.destroyRoom(gameRoomManager.findGameRoomById(roomId)     );
+    }
+
+    @Override
+    public GameRoom joinRoom(Player player, UUID gameRoom) {
+        gameRoomManager
+                .findGameRoomById(gameRoom)
+                .join(player);
+        return gameRoomManager.findGameRoomById(gameRoom);
+    }
+
+    @Override
+    public GameRoom leaveRoom(Player player, UUID gameRoom) {
+        gameRoomManager
+                .findGameRoomById(gameRoom)
+                .leave(player);
+        return gameRoomManager.findGameRoomById(gameRoom);
     }
 
 }

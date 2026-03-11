@@ -21,13 +21,17 @@ public class SoloGameRoom extends GameRoom {
     @Override
     public void join(Player player) {
         this.player = player;
-        player.setCurrentRoom(this);
+        players.add(player);
+        player.setCurrentRoomId(this.roomId);
     }
 
     @Override
-    public void leave() {
-        player.setCurrentRoom(null);
-        player = null;
+    public void leave(Player player) {
+        if (this.player.getPlayerId() == player.getPlayerId()) {
+            player.setCurrentRoomId(null);
+            players.remove(player);
+            this.player = null;
+        }
     }
 
     @Override

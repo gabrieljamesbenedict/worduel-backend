@@ -5,6 +5,8 @@ import com.porado.backend.service.WordService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -13,9 +15,10 @@ public abstract class GameRoom {
 
     protected final UUID roomId;
     protected GameInstance game;
+    protected List<Player> players = new ArrayList<>();
 
     public abstract void join(Player player);
-    public abstract void leave();
+    public abstract void leave(Player player);
     public abstract void start();
 
 }
