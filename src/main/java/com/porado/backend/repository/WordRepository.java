@@ -1,6 +1,5 @@
 package com.porado.backend.repository;
 
-import com.porado.backend.model.Word;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import tools.jackson.core.json.JsonFactory;
@@ -23,7 +22,7 @@ public class WordRepository {
     private Set wordSet = null;
     private Integer sizeOfSet = null;
 
-    public Word getRandomWord(int length) throws IOException {
+    public String getRandomWord(int length) throws IOException {
         if (wordSet == null) instantiateWordSet();
         Random rand = new Random();
         String wordStr = "";
@@ -31,7 +30,7 @@ public class WordRepository {
             wordStr = (String)wordSet.toArray()[rand.nextInt(sizeOfSet)];
         } while(wordStr.length() != length);
         System.out.println("Chosen Word: "+wordStr);
-        return new Word(wordStr);
+        return wordStr;
     }
 
     private void instantiateWordSet() throws IOException {

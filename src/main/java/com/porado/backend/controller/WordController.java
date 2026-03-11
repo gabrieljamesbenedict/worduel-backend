@@ -1,6 +1,6 @@
 package com.porado.backend.controller;
 
-import com.porado.backend.model.Word;
+import com.porado.backend.model.MessageResponse;
 import com.porado.backend.service.WordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ public class WordController {
     private final WordService wordService;
 
     @GetMapping("/random")
-    public ResponseEntity<Word> getRandomWord() {
-        return ResponseEntity.ok(wordService.getRandomWord(5));
+    public ResponseEntity<MessageResponse> getRandomWord() {
+        return ResponseEntity.ok(new MessageResponse("Word: " + wordService.getRandomWord(5)));
     }
 
 }
