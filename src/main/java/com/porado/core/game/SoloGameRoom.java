@@ -30,6 +30,6 @@ public class SoloGameRoom extends GameRoom {
 
     @Override
     public void start() {
-        gameManager = new SoloGameInstanceManager(this, player);
+        game = new SoloGameInstance(GameInstanceType.SOLO, targetWord);
     }
 }

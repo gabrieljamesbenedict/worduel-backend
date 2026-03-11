@@ -1,8 +1,7 @@
 package com.porado.core.game;
 
 import com.porado.backend.domain.Player;
-import com.porado.core.manager.GameInstanceManager;
-import com.porado.core.manager.SoloGameInstanceManager;
+import com.porado.backend.service.WordService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +12,7 @@ import java.util.UUID;
 public abstract class GameRoom {
 
     protected final UUID roomId;
-    protected GameInstanceManager gameManager;
+    protected GameInstance game;
 
     public abstract void join(Player player);
     public abstract void leave();
