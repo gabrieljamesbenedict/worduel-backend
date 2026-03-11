@@ -1,6 +1,8 @@
 package com.porado.backend.controller;
 
 import com.porado.backend.domain.Player;
+import com.porado.backend.model.GuessRequest;
+import com.porado.backend.model.GuessResponse;
 import com.porado.backend.model.MessageResponse;
 import com.porado.backend.service.GameService;
 import com.porado.backend.service.PlayerService;
@@ -38,7 +40,7 @@ public class GameController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/room/{id}")
     public ResponseEntity<MessageResponse> deleteRoom(@PathVariable UUID roomId) {
         try {
             gameService.destroyRoom(roomId);
@@ -71,4 +73,12 @@ public class GameController {
         return ResponseEntity.ok(gameService.startRoom(roomId));
     }
 
+    @PostMapping("/room/guess")
+    public ResponseEntity<GuessResponse> submitGuess(HttpServletRequest request, @RequestBody GuessRequest guessRequest) {
+        String id = (String) request.getAttribute("playerId");
+        UUID playerId = UUID.fromString(id);
+        Player player = playerService.getOrCreatePlayer(playerId);
+        guessRequest.setPlayer(player);
+        return ResponseEntity.ok(gameService.submitGuess(guessRequest));
+    }
 }

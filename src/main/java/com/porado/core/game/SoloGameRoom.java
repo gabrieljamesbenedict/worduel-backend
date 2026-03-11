@@ -36,6 +36,7 @@ public class SoloGameRoom extends GameRoom {
 
     @Override
     public void start() {
+        if (targetWord == null || targetWord.isEmpty()) throw new IllegalStateException("Target word must not be blank");
         game = new SoloGameInstance(GameInstanceType.SOLO, targetWord);
     }
 }

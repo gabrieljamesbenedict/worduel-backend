@@ -2,6 +2,8 @@ package com.porado.backend.service;
 
 
 import com.porado.backend.domain.Player;
+import com.porado.backend.model.GuessRequest;
+import com.porado.backend.model.GuessResponse;
 import com.porado.core.game.GameRoom;
 
 import java.util.List;
@@ -15,4 +17,5 @@ public interface GameService {
     GameRoom joinRoom(Player player, UUID gameRoom);
     GameRoom leaveRoom(Player player, UUID gameRoom);
     GameRoom startRoom(UUID gameRoom);
+    GuessResponse submitGuess(GuessRequest guessRequest);
 }

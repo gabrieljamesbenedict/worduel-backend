@@ -1,20 +1,16 @@
 package com.porado.core.game;
 
 import com.porado.backend.domain.Player;
-import com.porado.backend.model.GuessResult;
+import com.porado.backend.model.GuessResponse;
 import com.porado.core.util.GameInstanceType;
 import com.porado.core.util.LetterType;
-import lombok.Data;
 
 import java.util.*;
 
 public class SoloGameInstance extends GameInstance{
 
-    private final String targetWord;
-
     public SoloGameInstance(GameInstanceType type, String targetWord) {
-        super(type);
-        this.targetWord = targetWord;
+        super(type, targetWord);
     }
 
     private Player player;
@@ -22,7 +18,7 @@ public class SoloGameInstance extends GameInstance{
     private int currentGuessAttempt = 0;
 
     @Override
-    public GuessResult submitGuess(Player player, String guess) {
+    public GuessResponse submitGuess(Player player, String guess) {
         if (this.player.getPlayerId() != player.getPlayerId()) throw new IllegalArgumentException("Not the same Player");
         currentGuessAttempt++;
 
@@ -30,7 +26,7 @@ public class SoloGameInstance extends GameInstance{
         String targetStr = targetWord.toUpperCase();
 
         if (Objects.equals(guessStr, targetStr)) {
-            return new GuessResult(
+            return new GuessResponse(
                     guessStr,
                     List.of(
                             LetterType.CORRECT,
@@ -60,6 +56,6 @@ public class SoloGameInstance extends GameInstance{
             }
         }
 
-        return new GuessResult(targetWord, result);
+        return new GuessResponse(targetWord, result);
     }
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class GuessResult {
+public class GuessResponse {
 
     private final String guess;
     private final List<LetterType> position;

@@ -1,6 +1,8 @@
 package com.porado.backend.serviceImpl;
 
 import com.porado.backend.domain.Player;
+import com.porado.backend.model.GuessRequest;
+import com.porado.backend.model.GuessResponse;
 import com.porado.backend.service.GameService;
 import com.porado.core.game.GameRoom;
 import com.porado.core.manager.GameRoomManager;
@@ -59,6 +61,14 @@ public class GameServiceImpl implements GameService {
                 .findGameRoomById(gameRoom)
                 .start();
         return gameRoomManager.findGameRoomById(gameRoom);
+    }
+
+    @Override
+    public GuessResponse submitGuess(GuessRequest guessRequest) {
+        return gameRoomManager
+                .findGameRoomById(guessRequest.getRoomId())
+                .getGame()
+                .submitGuess(guessRequest.getPlayer(), guessRequest.getGuess());
     }
 
 }
