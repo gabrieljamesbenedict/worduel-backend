@@ -40,12 +40,12 @@ public class GameRoomManager {
         return room;
     }
 
-    public DuelGameRoom createDuelRoom() {
-        UUID roomId = UUID.randomUUID();
-        DuelGameRoom room = new DuelGameRoom(roomId);
-        rooms.add(room);
-        return room;
-    }
+//    public DuelGameRoom createDuelRoom() {
+//        UUID roomId = UUID.randomUUID();
+//        DuelGameRoom room = new DuelGameRoom(roomId);
+//        rooms.add(room);
+//        return room;
+//    }
 
     public boolean destroyRoom(GameRoom room) {
         return rooms.remove(room);
