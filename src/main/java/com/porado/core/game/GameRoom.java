@@ -1,13 +1,22 @@
 package com.porado.core.game;
 
-import com.porado.core.util.GameRoomStatus;
+import com.porado.backend.domain.Player;
+import com.porado.core.manager.GameInstanceManager;
+import com.porado.core.manager.SoloGameInstanceManager;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 @Data
-public class GameRoom {
+@RequiredArgsConstructor
+public abstract class GameRoom {
 
+    protected final UUID roomId;
+    protected GameInstanceManager gameManager;
+
+    public abstract void join(Player player);
+    public abstract void leave();
+    public abstract void start();
 
 }
