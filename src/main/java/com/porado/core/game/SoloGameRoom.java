@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public class SoloGameRoom extends GameRoom {
 
-    private Player player;
     private GameRoomStatus status;
     private final String targetWord;
 
@@ -20,18 +19,16 @@ public class SoloGameRoom extends GameRoom {
 
     @Override
     public void join(Player player) {
-        this.player = player;
-        players.add(player);
+        if (!players.isEmpty()) throw new IllegalArgumentException("Cannot add more players in Solo mode");
         player.setCurrentRoomId(this.roomId);
+        players.add(player);
     }
 
     @Override
     public void leave(Player player) {
-        if (this.player.getPlayerId() == player.getPlayerId()) {
-            player.setCurrentRoomId(null);
-            players.remove(player);
-            this.player = null;
-        }
+        if (players.isEmpty()) throw new IllegalArgumentException("Cannot remove from empty list");
+        player.setCurrentRoomId(null);
+        players.remove(player);
     }
 
     @Override
