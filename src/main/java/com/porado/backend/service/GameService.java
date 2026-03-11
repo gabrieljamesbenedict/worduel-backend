@@ -14,4 +14,5 @@ public interface GameService {
     void destroyRoom(UUID roomId);
     GameRoom joinRoom(Player player, UUID gameRoom);
     GameRoom leaveRoom(Player player, UUID gameRoom);
+    GameRoom startRoom(UUID gameRoom);
 }

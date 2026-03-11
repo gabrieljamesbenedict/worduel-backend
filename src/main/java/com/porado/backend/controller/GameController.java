@@ -66,4 +66,9 @@ public class GameController {
         return ResponseEntity.ok(gameService.leaveRoom(player, roomId));
     }
 
+    @PostMapping("/room/start")
+    public ResponseEntity<GameRoom> startRoom(@RequestParam("roomId") UUID roomId) {
+        return ResponseEntity.ok(gameService.startRoom(roomId));
+    }
+
 }

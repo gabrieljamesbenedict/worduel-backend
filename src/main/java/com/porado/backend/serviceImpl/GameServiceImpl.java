@@ -53,4 +53,12 @@ public class GameServiceImpl implements GameService {
         return gameRoomManager.findGameRoomById(gameRoom);
     }
 
+    @Override
+    public GameRoom startRoom(UUID gameRoom) {
+        gameRoomManager
+                .findGameRoomById(gameRoom)
+                .start();
+        return gameRoomManager.findGameRoomById(gameRoom);
+    }
+
 }
