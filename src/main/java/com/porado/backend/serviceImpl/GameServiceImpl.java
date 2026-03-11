@@ -1,6 +1,7 @@
 package com.porado.backend.serviceImpl;
 
 import com.porado.backend.service.GameService;
+import com.porado.core.game.GameRoom;
 import com.porado.core.manager.GameRoomManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,23 @@ public class GameServiceImpl implements GameService {
 
     private final GameRoomManager gameRoomManager;
 
-
     @Override
-    public void createGame() {
-
+    public List<GameRoom> viewAllRooms() {
+        return gameRoomManager.findAllGameRoom();
     }
 
     @Override
-    public void joinGame(UUID gameRoomId) {
-
+    public GameRoom createSoloRoom() {
+        return gameRoomManager.createSoloRoom();
     }
+
+    @Override
+    public GameRoom createDuelRoom() {
+        return gameRoomManager.createDuelRoom();
+    }
+    @Override
+    public void destroyRoom(UUID roomId) {
+        gameRoomManager.destroyRoom(gameRoomManager.findGameRoomById(roomId)     );
+    }
+
 }

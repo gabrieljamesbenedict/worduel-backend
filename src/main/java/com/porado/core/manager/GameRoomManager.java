@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,6 +19,18 @@ public class GameRoomManager {
 
     private final WordService wordService;
     private final Set<GameRoom> rooms = ConcurrentHashMap.newKeySet();
+
+    public List<GameRoom> findAllGameRoom() {
+        return rooms.stream().toList();
+    }
+
+    public GameRoom findGameRoomById(UUID roomId) {
+        return rooms
+                .stream()
+                .filter(gameRoom -> gameRoom.getRoomId().equals(roomId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Room not found"));
+    }
 
     public SoloGameRoom createSoloRoom() {
         UUID roomId = UUID.randomUUID();
