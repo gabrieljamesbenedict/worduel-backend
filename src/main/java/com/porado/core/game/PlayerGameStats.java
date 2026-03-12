@@ -10,4 +10,5 @@ public class PlayerGameStats {
     private int currentGuessAttempt = 0;
     private List<String> guessList = new ArrayList<>();
     private boolean hasWon = false;
+    private boolean hasFinished = false;
 }
