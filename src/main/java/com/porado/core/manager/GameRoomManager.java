@@ -32,8 +32,8 @@ public class GameRoomManager {
 
     public SoloGameRoom createSoloRoom() {
         UUID roomId = UUID.randomUUID();
-        String targetWord = wordService.getRandomWord(5);
-        SoloGameRoom room = new SoloGameRoom(roomId, targetWord);
+        //String targetWord = wordService.getRandomWord(5);
+        SoloGameRoom room = new SoloGameRoom(roomId, wordService);
         rooms.add(room);
         return room;
     }

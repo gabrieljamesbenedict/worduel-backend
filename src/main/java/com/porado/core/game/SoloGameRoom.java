@@ -2,6 +2,7 @@ package com.porado.core.game;
 
 
 import com.porado.backend.domain.Player;
+import com.porado.backend.service.WordService;
 import com.porado.core.util.GameInstanceType;
 import com.porado.core.util.GameRoomStatus;
 
@@ -10,11 +11,11 @@ import java.util.UUID;
 public class SoloGameRoom extends GameRoom {
 
     private GameRoomStatus status;
-    private final String targetWord;
+    private final WordService wordleService;
 
-    public SoloGameRoom(UUID roomId, String targetWord) {
+    public SoloGameRoom(UUID roomId, WordService wordleService) {
         super(roomId);
-        this.targetWord = targetWord;
+        this.wordleService = wordleService;
     }
 
     @Override
@@ -33,8 +34,8 @@ public class SoloGameRoom extends GameRoom {
 
     @Override
     public void start() {
-        if (targetWord == null || targetWord.isEmpty()) throw new IllegalStateException("Target word must not be blank");
-        game = new SoloGameInstance(GameInstanceType.SOLO, targetWord, players);
+        String targetWord = wordleService.getRandomWord(5);
+        game = new SoloGameInstance(this, GameInstanceType.SOLO, targetWord, players);
     }
 
     @Override
