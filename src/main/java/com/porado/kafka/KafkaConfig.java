@@ -20,13 +20,11 @@ public class KafkaConfig {
 
     public static final String TOPIC_NAME = "game-completed-event";
 
-    // --- Topic ---
     @Bean
     public NewTopic gameCompletedEventTopic() {
         return new NewTopic(TOPIC_NAME, 1, (short) 1); // 1 partition, replication factor 1
     }
 
-    // --- Producer Factory ---
     @Bean
     public ProducerFactory<String, GameCompletedEvent> producerFactory() {
         Map<String, Object> config = new HashMap<>();
@@ -36,13 +34,11 @@ public class KafkaConfig {
         return new DefaultKafkaProducerFactory<>(config);
     }
 
-    // --- Kafka Template ---
     @Bean
     public KafkaTemplate<String, GameCompletedEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
-    // --- Consumer Factory ---
     @Bean
     public ConsumerFactory<String, GameCompletedEvent> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
@@ -54,7 +50,6 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
-    // --- Listener Container Factory ---
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, GameCompletedEvent> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, GameCompletedEvent> factory =

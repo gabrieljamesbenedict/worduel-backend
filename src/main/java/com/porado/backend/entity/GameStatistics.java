@@ -39,14 +39,14 @@ public class GameStatistics {
     @Column(nullable = false)
     private LocalDateTime completedAt;
 
-    public GameStatistics(Long id, String roomId, GameInstanceType type, List<Player> player1, List<Player> player2, List<String> guesses1, List<String> guesses2, LocalDateTime completedAt) {
+    public GameStatistics(Long id, String roomId, GameInstanceType type, String player1, String player2, String guesses1, String guesses2, LocalDateTime completedAt) {
         this.id = id;
         this.roomId = roomId;
         this.type = type;
-        this.player1 = player1.stream().map(Player::getNickname).collect(Collectors.joining(","));
-        this.player2 = player2.stream().map(Player::getNickname).collect(Collectors.joining(","));
-        this.guesses1 = String.join(",", guesses1);
-        this.guesses2 = String.join(",", guesses1);
+        this.player1 = player1;
+        this.player2 = player2;
+        this.guesses1 = guesses1;
+        this.guesses2 = guesses2;
         this.completedAt = completedAt;
     }
 }
