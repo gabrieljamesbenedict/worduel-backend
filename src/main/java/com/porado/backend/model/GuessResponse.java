@@ -5,10 +5,12 @@ import com.porado.core.util.LetterType;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class GuessResponse {
 
+    private final UUID playerId;
     private final String guess;
     private final List<LetterType> position;
 
