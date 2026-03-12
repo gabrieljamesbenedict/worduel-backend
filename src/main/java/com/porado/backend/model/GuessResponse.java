@@ -10,8 +10,9 @@ import java.util.UUID;
 @Data
 public class GuessResponse {
 
-    private final UUID playerId;
+    private UUID playerId;
     private final String guess;
+    private final String target;
     private final List<LetterType> position;
 
 }

@@ -17,51 +17,27 @@ public class SoloGameInstance extends GameInstance{
 
     @Override
     public GuessResponse submitGuess(Player player, String guess) {
+
         playerGameStats.setCurrentGuessAttempt(
                 playerGameStats.getCurrentGuessAttempt() + 1
         );
+
         playerGameStats.getGuessList().add(guess);
 
-        String guessStr = guess.toUpperCase();
-        String targetStr = targetWord.toUpperCase();
+        GuessResponse guessResponse = WordEvaluator.evaluate(targetWord, guess);
+        guessResponse.setPlayerId(player.getPlayerId());
 
-        if (Objects.equals(guessStr, targetStr)) {
+        boolean isWin = guess.equalsIgnoreCase(targetWord);
+
+        if (isWin) {
             playerGameStats.setHasWon(true);
-            return new GuessResponse(
-                    player.getPlayerId(),
-                    guessStr,
-                    List.of(
-                            LetterType.CORRECT,
-                            LetterType.CORRECT,
-                            LetterType.CORRECT,
-                            LetterType.CORRECT,
-                            LetterType.CORRECT)
-            );
-        }
-
-        Map<Character, Integer> letterCountMap = new HashMap<>();
-        for (char c : targetStr.toCharArray()) {
-            letterCountMap.put(c, letterCountMap.getOrDefault(c, 0) + 1);
-        }
-
-        char[] guessCharArray = guessStr.toCharArray();
-        char[] targetCharArray = targetStr.toCharArray();
-        List<LetterType> result = new ArrayList<>();
-        for (int i = 0; i < guessCharArray.length; i++) {
-            if (targetCharArray[i] == guessCharArray[i]) {
-                result.add(LetterType.CORRECT);
-            } else if (letterCountMap.containsKey(guessCharArray[i])) {
-                result.add(LetterType.PRESENT);
-                letterCountMap.put(guessCharArray[i], letterCountMap.get(guessCharArray[i]) - 1);
-            } else {
-                result.add(LetterType.ABSENT);
-            }
+            return guessResponse;
         }
 
         if (playerGameStats.getCurrentGuessAttempt() >= 6) {
             playerGameStats.setHasWon(false);
         }
 
-        return new GuessResponse(player.getPlayerId(),targetWord, result);
+        return guessResponse;
     }
 }
