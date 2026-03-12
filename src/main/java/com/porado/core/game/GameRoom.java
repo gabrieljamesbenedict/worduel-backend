@@ -20,9 +20,5 @@ public abstract class GameRoom {
     public abstract void join(Player player);
     public abstract void leave(Player player);
     public abstract void start();
-
-    public void end() {
-
-        game = null;
-    };
+    public abstract <T extends GameInstance> void end(T gameInstance);
 }
