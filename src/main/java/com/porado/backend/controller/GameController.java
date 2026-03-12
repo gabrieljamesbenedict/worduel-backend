@@ -74,9 +74,8 @@ public class GameController {
     }
 
     @PostMapping("/room/guess")
-    public ResponseEntity<GuessResponse> submitGuess(HttpServletRequest request, @RequestBody GuessRequest guessRequest) {
-        String id = (String) request.getAttribute("playerId");
-        UUID playerId = UUID.fromString(id);
+    public ResponseEntity<GuessResponse> submitGuess(@RequestBody GuessRequest guessRequest) {
+        UUID playerId = guessRequest.getPlayerId();
         Player player = playerService.getOrCreatePlayer(playerId);
         guessRequest.setPlayer(player);
         return ResponseEntity.ok(gameService.submitGuess(guessRequest));
