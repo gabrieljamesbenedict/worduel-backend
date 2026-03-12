@@ -1,6 +1,7 @@
 package com.porado.core.manager;
 
 import com.porado.backend.service.WordService;
+import com.porado.core.game.DuelGameRoom;
 import com.porado.core.game.GameRoom;
 import com.porado.core.game.SoloGameRoom;
 import lombok.RequiredArgsConstructor;
@@ -32,18 +33,17 @@ public class GameRoomManager {
 
     public SoloGameRoom createSoloRoom() {
         UUID roomId = UUID.randomUUID();
-        //String targetWord = wordService.getRandomWord(5);
         SoloGameRoom room = new SoloGameRoom(roomId, wordService);
         rooms.add(room);
         return room;
     }
 
-//    public DuelGameRoom createDuelRoom() {
-//        UUID roomId = UUID.randomUUID();
-//        DuelGameRoom room = new DuelGameRoom(roomId);
-//        rooms.add(room);
-//        return room;
-//    }
+    public DuelGameRoom createDuelRoom() {
+        UUID roomId = UUID.randomUUID();
+        DuelGameRoom room = new DuelGameRoom(roomId, wordService);
+        rooms.add(room);
+        return room;
+    }
 
     public boolean destroyRoom(GameRoom room) {
         return rooms.remove(room);

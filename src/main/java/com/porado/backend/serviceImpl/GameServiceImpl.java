@@ -30,8 +30,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public GameRoom createDuelRoom() {
-        //return gameRoomManager.createDuelRoom();
-        return null;
+        return gameRoomManager.createDuelRoom();
     }
 
     @Override

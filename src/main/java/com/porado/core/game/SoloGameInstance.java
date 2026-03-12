@@ -17,11 +17,9 @@ public class SoloGameInstance extends GameInstance{
 
     @Override
     public GuessResponse submitGuess(Player player, String guess) {
-
         playerGameStats.setCurrentGuessAttempt(
                 playerGameStats.getCurrentGuessAttempt() + 1
         );
-
         playerGameStats.getGuessList().add(guess);
 
         GuessResponse guessResponse = WordEvaluator.evaluate(targetWord, guess);
