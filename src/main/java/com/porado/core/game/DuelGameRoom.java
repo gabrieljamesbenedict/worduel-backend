@@ -37,9 +37,4 @@ public class DuelGameRoom extends GameRoom{
         game = new DuelGameInstance(this, GameInstanceType.DUEL, targetWord, players);
     }
 
-    @Override
-    public void end() {
-        game = null;
-    }
-
 }

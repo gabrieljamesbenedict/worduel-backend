@@ -37,9 +37,4 @@ public class SoloGameRoom extends GameRoom {
         String targetWord = wordleService.getRandomWord(5);
         game = new SoloGameInstance(this, GameInstanceType.SOLO, targetWord, players);
     }
-
-    @Override
-    public void end() {
-        game = null;
-    }
 }
