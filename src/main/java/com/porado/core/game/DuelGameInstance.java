@@ -41,7 +41,7 @@ public class DuelGameInstance extends GameInstance {
 
         if (stats.getCurrentGuessAttempt() >= 6) {
             stats.setHasFinished(true);
-            gameRoom.end();
+            gameRoom.end(this);
         }
 
         return guessResponse;

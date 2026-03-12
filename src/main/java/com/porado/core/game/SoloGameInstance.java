@@ -4,11 +4,13 @@ import com.porado.backend.domain.Player;
 import com.porado.backend.model.GuessResponse;
 import com.porado.core.util.GameInstanceType;
 import com.porado.core.util.LetterType;
+import lombok.Getter;
 
 import java.util.*;
 
 public class SoloGameInstance extends GameInstance{
 
+    @Getter
     private final PlayerGameStats playerGameStats = new PlayerGameStats();
 
     public SoloGameInstance(GameRoom gameRoom, GameInstanceType type, String targetWord, List<Player> playerList) {
@@ -35,7 +37,7 @@ public class SoloGameInstance extends GameInstance{
 
         if (playerGameStats.getCurrentGuessAttempt() >= 6) {
             playerGameStats.setHasFinished(true);
-            gameRoom.end();
+            gameRoom.end(this);
         }
 
         return guessResponse;
