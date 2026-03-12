@@ -20,5 +20,5 @@ public abstract class GameRoom {
     public abstract void join(Player player);
     public abstract void leave(Player player);
     public abstract void start();
-
+    public abstract void end();
 }
