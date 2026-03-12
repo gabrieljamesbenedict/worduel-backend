@@ -11,8 +11,8 @@ public class SoloGameInstance extends GameInstance{
 
     private final PlayerGameStats playerGameStats = new PlayerGameStats();
 
-    public SoloGameInstance(GameInstanceType type, String targetWord, List<Player> playerList) {
-        super(type, targetWord, playerList);
+    public SoloGameInstance(GameRoom gameRoom, GameInstanceType type, String targetWord, List<Player> playerList) {
+        super(gameRoom, type, targetWord, playerList);
     }
 
     @Override
@@ -31,11 +31,13 @@ public class SoloGameInstance extends GameInstance{
 
         if (isWin) {
             playerGameStats.setHasWon(true);
+            playerGameStats.setHasFinished(true);
             return guessResponse;
         }
 
         if (playerGameStats.getCurrentGuessAttempt() >= 6) {
-            playerGameStats.setHasWon(false);
+            playerGameStats.setHasFinished(true);
+            gameRoom.end();
         }
 
         return guessResponse;
