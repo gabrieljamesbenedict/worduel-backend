@@ -9,24 +9,26 @@ import java.util.*;
 
 public class SoloGameInstance extends GameInstance{
 
-    public SoloGameInstance(GameInstanceType type, String targetWord) {
-        super(type, targetWord);
+    private final PlayerGameStats playerGameStats = new PlayerGameStats();
+
+    public SoloGameInstance(GameInstanceType type, String targetWord, List<Player> playerList) {
+        super(type, targetWord, playerList);
     }
-
-    private Player player;
-
-    private int currentGuessAttempt = 0;
 
     @Override
     public GuessResponse submitGuess(Player player, String guess) {
-        if (this.player.getPlayerId() != player.getPlayerId()) throw new IllegalArgumentException("Not the same Player");
-        currentGuessAttempt++;
+        playerGameStats.setCurrentGuessAttempt(
+                playerGameStats.getCurrentGuessAttempt() + 1
+        );
+        playerGameStats.getGuessList().add(guess);
 
         String guessStr = guess.toUpperCase();
         String targetStr = targetWord.toUpperCase();
 
         if (Objects.equals(guessStr, targetStr)) {
+            playerGameStats.setHasWon(true);
             return new GuessResponse(
+                    player.getPlayerId(),
                     guessStr,
                     List.of(
                             LetterType.CORRECT,
@@ -56,6 +58,10 @@ public class SoloGameInstance extends GameInstance{
             }
         }
 
-        return new GuessResponse(targetWord, result);
+        if (playerGameStats.getCurrentGuessAttempt() >= 6) {
+            playerGameStats.setHasWon(false);
+        }
+
+        return new GuessResponse(player.getPlayerId(),targetWord, result);
     }
 }
