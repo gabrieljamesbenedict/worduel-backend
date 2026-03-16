@@ -19,6 +19,7 @@ public class DuelGameRoom extends GameRoom{
         super(roomId);
         this.wordleService = wordleService;
         this.kafkaTemplate = kafkaTemplate;
+        this.roomType = GameInstanceType.DUEL;
     }
 
     @Override

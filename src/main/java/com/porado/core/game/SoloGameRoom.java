@@ -23,6 +23,7 @@ public class SoloGameRoom extends GameRoom {
         super(roomId);
         this.wordleService = wordleService;
         this.kafkaTemplate = kafkaTemplate;
+        this.roomType = GameInstanceType.SOLO;
     }
 
     @Override
