@@ -7,7 +7,9 @@ import com.porado.core.util.GameRoomStatus;
 import com.porado.kafka.GameCompletedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class DuelGameRoom extends GameRoom{
 
@@ -45,6 +47,33 @@ public class DuelGameRoom extends GameRoom{
     @Override
     public <T extends GameInstance> void end(T gameInstance) {
         DuelGameInstance duelGameInstance = (DuelGameInstance) gameInstance;
+        String guesses1 = String.join(", ", duelGameInstance.getPlayerGameStats().get(players.getFirst().getPlayerId()).getGuessList());
+        String guesses2 = String.join(", ", duelGameInstance.getPlayerGameStats().get(players.getLast().getPlayerId()).getGuessList());
+
+        GameCompletedEvent event = new GameCompletedEvent(
+                null,
+                roomId.toString(),
+                GameInstanceType.DUEL,
+                (players.getFirst().getNickname() == null) ? "No Name" : players.getFirst().getNickname(),
+                (players.getLast().getNickname() == null) ? "No Name" : players.getLast().getNickname(),
+                guesses1,
+                guesses2,
+                LocalDateTime.now()
+        );
+
+        try {
+            kafkaTemplate.send(
+                    "game-completed-event",
+                    roomId.toString(),
+                    event
+            ).get();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
+
         game = null;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class SoloGameRoom extends GameRoom {
 
@@ -56,18 +57,24 @@ public class SoloGameRoom extends GameRoom {
                 null,
                 roomId.toString(),
                 GameInstanceType.SOLO,
-                players.getFirst().getNickname(),
+                (players.getFirst().getNickname() == null) ? "No Name" : players.getFirst().getNickname(),
                 null,
                 guesses,
                 null,
                 LocalDateTime.now()
         );
 
-        kafkaTemplate.send(
-                "game-completed-event",
-                roomId.toString(),
-                event
-        );
+        try {
+            kafkaTemplate.send(
+                    "game-completed-event",
+                    roomId.toString(),
+                    event
+            ).get();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
 
         game = null;
     }

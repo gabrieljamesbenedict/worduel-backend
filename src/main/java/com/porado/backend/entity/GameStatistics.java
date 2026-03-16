@@ -28,13 +28,13 @@ public class GameStatistics {
     @Column(nullable = false)
     private String player1;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String player2;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String guesses1;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = true, columnDefinition = "TEXT")
     private String guesses2;
 
     @Column(nullable = false)
