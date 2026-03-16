@@ -29,6 +29,12 @@ public class GameController {
         return ResponseEntity.ok(gameService.viewAllRooms());
     }
 
+    @GetMapping("/room/{roomId}")
+    public ResponseEntity<GameRoom> viewRoom(@PathVariable String roomId) {
+        UUID id = UUID.fromString(roomId);
+        return ResponseEntity.ok(gameService.viewAllRooms().stream().filter(room->room.getRoomId().equals(id)).findFirst().orElseGet(null));
+    }
+
     @PostMapping("/room")
     public ResponseEntity<GameRoom> createRoom(@RequestParam("type") String type) {
         if ("solo".equalsIgnoreCase(type)) {
