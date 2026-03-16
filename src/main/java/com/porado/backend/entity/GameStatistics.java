@@ -2,6 +2,7 @@ package com.porado.backend.entity;
 
 import com.porado.backend.domain.Player;
 import com.porado.core.util.GameInstanceType;
+import com.porado.kafka.GameCompletedEvent;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -48,5 +49,21 @@ public class GameStatistics {
         this.guesses1 = guesses1;
         this.guesses2 = guesses2;
         this.completedAt = completedAt;
+    }
+
+    private GameStatistics() {}
+
+    public static GameStatistics fromEvent(GameCompletedEvent event) {
+        GameStatistics stats = new GameStatistics();
+
+        stats.setRoomId(event.getRoomId());
+        stats.setType(event.getType());
+        stats.setPlayer1(event.getPlayer1());
+        stats.setPlayer2(event.getPlayer2());
+        stats.setGuesses1(event.getGuesses1());
+        stats.setGuesses2(event.getGuesses2());
+        stats.setCompletedAt(event.getCompletedAt());
+
+        return stats;
     }
 }

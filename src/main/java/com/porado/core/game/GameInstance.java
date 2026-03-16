@@ -6,8 +6,7 @@ import com.porado.backend.model.GuessResponse;
 import com.porado.core.util.GameInstanceType;
 import lombok.Data;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 public abstract class GameInstance {
@@ -18,6 +17,7 @@ public abstract class GameInstance {
     private final GameInstanceType type;
     private final UUID gameId;
     protected final String targetWord;
+    protected Map<UUID, PlayerGameStats> playerGameStats = new HashMap<>();
 
     @JsonIgnore
     protected final List<Player> playerList;

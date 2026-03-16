@@ -50,7 +50,7 @@ public class SoloGameRoom extends GameRoom {
     public <T extends GameInstance> void end(T gameInstance) {
 
         SoloGameInstance soloGameInstance = (SoloGameInstance) gameInstance;
-        String guesses = String.join(", ", soloGameInstance.getPlayerGameStats().getGuessList());
+        String guesses = String.join(", ", soloGameInstance.getPlayerGameStats().get(players.getFirst().getPlayerId()).getGuessList());
 
         GameCompletedEvent event = new GameCompletedEvent(
                 null,
